@@ -66,7 +66,10 @@ export const RateById = () => {
 
   return (
     <div className="p-3 flex flex-col">
-      <IconButton className="absolute top-4 right-4" onClick={() => nav("/ratemarket")}>
+      <IconButton
+        className="absolute top-4 left-0 w-10 h-10 flex justify-center items-center"
+        onClick={() => nav("/ratemarket")}
+      >
         <IoArrowBackSharp />
       </IconButton>
       <img

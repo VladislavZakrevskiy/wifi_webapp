@@ -4,7 +4,7 @@ import { useCartStore } from "../../Cart";
 
 export const CartButton = ({ rate }: { rate: Rate<true> }) => {
   const { decreasePurchase, increasePurchase, purchases } = useCartStore();
-  const currentPurchase = purchases.find(({ type: { id } }) => id === rate.id);
+  const currentPurchase = purchases?.find(({ type: { id } }) => id === rate.id);
 
   if (!currentPurchase) {
     return (
@@ -14,7 +14,7 @@ export const CartButton = ({ rate }: { rate: Rate<true> }) => {
     );
   } else {
     return (
-      <div>
+      <div className="flex justify-evenly items-center">
         <Button size="l" mode="plain" onClick={() => decreasePurchase(rate.id)}>
           -
         </Button>

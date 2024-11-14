@@ -9,6 +9,7 @@ import { RateFilterModal } from "../../components/Rate";
 import { useCartStore } from "../../components/Cart";
 import { tg } from "../../config/tg";
 import { useNavigate } from "react-router-dom";
+import { useGetPurchaseLength } from "./hooks/useGetCartLength";
 
 export const RateListPage = () => {
   const { purchases } = useCartStore();
@@ -17,14 +18,15 @@ export const RateListPage = () => {
     useFilterSortRates();
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
   const nav = useNavigate();
+  const purchaseLength = useGetPurchaseLength();
 
   useEffect(() => {
     if (purchases.length > 0) {
       tg.MainButton.onClick(() => nav("/submit"));
-      tg.MainButton.text = `Корзина (${purchases.length})`;
+      tg.MainButton.text = `Корзина (${purchaseLength})`;
       tg.MainButton.show();
     }
-  }, [purchases]);
+  }, [purchaseLength]);
 
   if (isLoading) {
     return (
