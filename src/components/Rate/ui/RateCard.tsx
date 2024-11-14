@@ -12,7 +12,11 @@ const CartButton = ({ rate }: { rate: Rate<true> }) => {
   const currentPurchase = purchases.find(({ type: { id } }) => id === rate.id);
 
   if (!currentPurchase) {
-    return <Button onClick={() => increasePurchase(rate.id)}>Добавить</Button>;
+    return (
+      <Button stretched onClick={() => increasePurchase(rate.id)}>
+        Добавить
+      </Button>
+    );
   } else {
     return (
       <div>
