@@ -38,7 +38,7 @@ export const RateListPage = () => {
     return (
       <div>
         <Typography color="#f00">Ошибка! Простите, попробуйте обновить страницу</Typography>
-        <Button>Обновить</Button>
+        <Button onClick={() => location.reload()}>Обновить</Button>
       </div>
     );
   }
@@ -62,7 +62,7 @@ export const RateListPage = () => {
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}
       />
-      <div className="grid grid-cols-2 gap-2 justify-center items-start">
+      <div className="p-2 grid grid-cols-2 gap-2 justify-center items-start">
         {currentRates.map((rate) => (
           <RateCard key={rate.id} rate={rate} />
         ))}
