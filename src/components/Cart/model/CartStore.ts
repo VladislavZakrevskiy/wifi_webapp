@@ -23,6 +23,7 @@ export const useCartStore = create<State & Action>((set) => ({
       const newRate = store.allRates.find(({ id }) => id === rate_id);
       const purchaseRate = store.purchases.find(({ type }) => type.id === rate_id);
       if (purchaseRate) {
+        console.log(purchaseRate)
         const newPurchase = store.purchases.filter(({type: {id}}) => id !== rate_id)
         return {
           ...store,
