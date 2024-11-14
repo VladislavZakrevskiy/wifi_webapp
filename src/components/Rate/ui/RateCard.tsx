@@ -35,7 +35,7 @@ export const RateCard: FC<RateCardProps> = ({ rate }) => {
     <Card>
       <Card.Chip readOnly>{price} РУБ.</Card.Chip>
       <img
-        src={__API__ + "/static/" + image_url}
+        src={__IMAGE_BUCKET__ + image_url}
         style={{
           display: "block",
           height: 300,

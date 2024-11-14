@@ -18,16 +18,16 @@ export const useFilterSortRates = () => {
         }
         switch (sortType) {
             case 'high_popularity':
-                newAllRates.sort((a, b) => b.users.length - a.users.length)
-                break
-            case 'low_popularity':
                 newAllRates.sort((a, b) => a.users.length - b.users.length)
                 break
+            case 'low_popularity':
+                newAllRates.sort((a, b) => b.users.length - a.users.length)
+                break
             case 'high_price':
-                newAllRates.sort((a, b) => b.price - a.price)
+                newAllRates.sort((a, b) => a.price - b.price)
                 break
             case 'low_price':
-                newAllRates.sort((a, b) => a.price - b.price)
+                newAllRates.sort((a, b) => b.price - a.price)
                 break
         }
 
