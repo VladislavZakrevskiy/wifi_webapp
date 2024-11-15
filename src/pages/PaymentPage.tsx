@@ -16,7 +16,7 @@ export const PaymentPage = () => {
       tg.close();
     });
     tg.MainButton.show();
-  }, []);
+  }, [paymentMethod, purchase]);
 
   return (
     <div className="p-3 ">
