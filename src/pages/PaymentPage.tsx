@@ -9,16 +9,16 @@ export const PaymentPage = () => {
   const [paymentMethod, setPaymentMethod] = useState<"stars" | "tg_native">("tg_native");
   const nav = useNavigate();
 
-  useEffect(() => {
-    const onSendData = () => {
-      alert(JSON.stringify({ paymentMethod, purchase }));
-      tg.sendData(JSON.stringify({ paymentMethod, purchase }));
-    };
+  const onSendData = () => {
+    alert(JSON.stringify({ paymentMethod, purchase }));
+    tg.sendData(JSON.stringify({ paymentMethod, purchase }));
+  };
 
+  useEffect(() => {
     tg.MainButton.text = "Оплатить";
     tg.MainButton.onClick(onSendData);
     tg.MainButton.show();
-  }, [paymentMethod, purchase]);
+  }, [paymentMethod, purchase, onSendData]);
 
   return (
     <div className="p-3 ">
