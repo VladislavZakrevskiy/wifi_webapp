@@ -39,7 +39,7 @@ export const RateById = () => {
     }
     tg.MainButton.text = purchase ? `Перейти к покупке` : "Добавить";
     tg.MainButton.show();
-  }, [purchase]);
+  }, [purchase, currentRate]);
 
   if (isLoading) {
     return (
