@@ -6,7 +6,7 @@ import { useCartStore } from "../components/Cart";
 
 export const PaymentPage = () => {
   const { purchase } = useCartStore();
-  const [paymentMethod, setPaymentMethod] = useState<"stars" | "tg_native">("tg_native");
+  const [paymentMethod, setPaymentMethod] = useState<"stars" | "tg_native">("stars");
   const nav = useNavigate();
 
   const onSendData = () => {
