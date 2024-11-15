@@ -2,15 +2,17 @@ import { Button, Cell, Divider, Radio, Title } from "@telegram-apps/telegram-ui"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { tg } from "../config/tg";
+import { useCartStore } from "../components/Cart";
 
 export const PaymentPage = () => {
+  const { purchase } = useCartStore();
   const [paymentMethod, setPaymentMethod] = useState<"stars" | "tg_native">("tg_native");
   const nav = useNavigate();
 
   useEffect(() => {
     tg.MainButton.text = "Оплатить";
     tg.MainButton.onClick(() => {
-      tg.sendData(JSON.stringify({ paymentMethod }));
+      tg.sendData(JSON.stringify({ paymentMethod, purchase }));
       tg.close();
     });
     tg.MainButton.show();
@@ -28,8 +30,9 @@ export const PaymentPage = () => {
       <Divider />
 
       <div className="flex flex-col gap-2 mt-3">
-        <div className="flex flex-col gap-1 justify-start items-center">
+        <div className="flex flex-col w-full gap-1 justify-start items-center">
           <Cell
+            className="w-full"
             Component="label"
             before={
               <Radio
@@ -41,6 +44,7 @@ export const PaymentPage = () => {
             Telegram Stars
           </Cell>
           <Cell
+            className="w-full"
             Component="label"
             before={
               <Radio

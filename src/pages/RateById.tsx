@@ -61,7 +61,7 @@ export const RateById = () => {
   return (
     <>
       <Button
-        className="absolute top-4 right-4 w-10 h-10 flex justify-center items-center"
+        className="absolute top-4 left-6 w-10 h-10 flex justify-center items-center"
         onClick={() => nav("/ratemarket")}
       >
         <IoArrowBackSharp />
