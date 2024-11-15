@@ -32,14 +32,14 @@ export const RateById = () => {
   }, []);
 
   useEffect(() => {
-    if (purchase) {
+    if (purchase?.id === currentRate?.id) {
       tg.MainButton.onClick(() => nav("/submit"));
     } else {
-      tg.MainButton.onClick(() => setPurchase(currentRate?.id || ""));
+      tg.MainButton.onClick(() => setPurchase(currentRate!.id));
     }
     tg.MainButton.text = purchase ? `Перейти к покупке` : "Добавить";
     tg.MainButton.show();
-  }, []);
+  }, [purchase]);
 
   if (isLoading) {
     return (
@@ -59,23 +59,25 @@ export const RateById = () => {
   }
 
   return (
-    <div className="p-3 flex flex-col gap-2">
+    <>
       <Button
-        className="absolute top-4 left-0 w-10 h-10 flex justify-center items-center"
+        className="absolute top-4 right-4 w-10 h-10 flex justify-center items-center"
         onClick={() => nav("/ratemarket")}
       >
         <IoArrowBackSharp />
       </Button>
-      <img
-        src={__IMAGE_BUCKET__ + currentRate?.image_url}
-        style={{
-          display: "block",
-          objectFit: "cover",
-          width: "100%",
-        }}
-      />
-      <Title>{currentRate?.name}</Title>
-      <Caption>{currentRate?.description}</Caption>
-    </div>
+      <div className="p-3 flex flex-col gap-2">
+        <img
+          src={__IMAGE_BUCKET__ + currentRate?.image_url}
+          style={{
+            display: "block",
+            objectFit: "cover",
+            width: "100%",
+          }}
+        />
+        <Title>{currentRate?.name}</Title>
+        <Caption>{currentRate?.description}</Caption>
+      </div>
+    </>
   );
 };
