@@ -1,4 +1,4 @@
-import { Button, Cell, Divider, Radio, Title } from "@telegram-apps/telegram-ui";
+import { Button, Cell, Divider, Radio, Title, Typography } from "@telegram-apps/telegram-ui";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { tg } from "../config/tg";
@@ -6,7 +6,7 @@ import { useCartStore } from "../components/Cart";
 
 export const PaymentPage = () => {
   const { purchase } = useCartStore();
-  const [paymentMethod, setPaymentMethod] = useState<"stars" | "tg_native">("stars");
+  const [paymentMethod, setPaymentMethod] = useState<"stars" | "tg_native">("tg_native");
   const nav = useNavigate();
 
   const onSendData = () => {
@@ -26,6 +26,12 @@ export const PaymentPage = () => {
         <div className="flex justify-between items-center">
           <Title>Корзина</Title>
           <Button onClick={() => nav("/submit")}>Вернуться в корзину</Button>
+        </div>
+        <div className="flex justify-end items-center">
+          <Typography>
+            Итого: {paymentMethod === "stars" ? purchase?.stars : purchase?.price}{" "}
+            {paymentMethod === "stars" ? "⭐️ (XTR)" : "РУБ."}
+          </Typography>
         </div>
       </div>
 
