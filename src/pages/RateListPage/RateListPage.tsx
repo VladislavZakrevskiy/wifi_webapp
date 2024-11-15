@@ -9,24 +9,24 @@ import { RateFilterModal } from "../../components/Rate";
 import { useCartStore } from "../../components/Cart";
 import { tg } from "../../config/tg";
 import { useNavigate } from "react-router-dom";
-import { useGetPurchaseLength } from "./hooks/useGetCartLength";
 
 export const RateListPage = () => {
-  const { purchases } = useCartStore();
+  const { purchase } = useCartStore();
   const { isError, isLoading } = useGetInitRates();
   const { currentRates, searchString, sortType, setSearchString, setSortStype } =
     useFilterSortRates();
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
   const nav = useNavigate();
-  const purchaseLength = useGetPurchaseLength();
+
+  console.log(currentRates);
 
   useEffect(() => {
-    if (purchases.length > 0) {
+    if (purchase) {
       tg.MainButton.onClick(() => nav("/submit"));
-      tg.MainButton.text = `Корзина (${purchaseLength})`;
+      tg.MainButton.text = `Перейти к оформлению`;
       tg.MainButton.show();
     }
-  }, [purchaseLength]);
+  }, [purchase]);
 
   if (isLoading) {
     return (

@@ -1,26 +1,21 @@
-import { Button, Typography } from "@telegram-apps/telegram-ui";
+import { Button } from "@telegram-apps/telegram-ui";
 import { Rate } from "../../../types/Rate";
 import { useCartStore } from "../../Cart";
 
 export const CartButton = ({ rate }: { rate: Rate<true> }) => {
-  const { decreasePurchase, increasePurchase, purchases } = useCartStore();
-  const currentPurchase = purchases?.find(({ type: { id } }) => id === rate.id);
+  const { purchase, setPurchase, deletePurchase } = useCartStore();
 
-  if (!currentPurchase) {
+  if (purchase?.id !== rate.id) {
     return (
-      <Button stretched onClick={() => increasePurchase(rate.id)}>
+      <Button stretched onClick={() => setPurchase(rate.id)}>
         Добавить
       </Button>
     );
   } else {
     return (
       <div className="flex justify-evenly items-center">
-        <Button size="l" mode="plain" onClick={() => decreasePurchase(rate.id)}>
-          -
-        </Button>
-        <Typography>{currentPurchase.pieces}</Typography>
-        <Button size="l" mode="plain" onClick={() => increasePurchase(rate.id)}>
-          +
+        <Button mode="bezeled" stretched onClick={() => deletePurchase()}>
+          Убрать
         </Button>
       </div>
     );

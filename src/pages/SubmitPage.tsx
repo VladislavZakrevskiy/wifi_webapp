@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { IoChevronForward } from "react-icons/io5";
 
 export const SubmitPage = () => {
-  const { purchases } = useCartStore();
+  const { purchase } = useCartStore();
   const purchaseLength = useGetPurchaseLength();
   const nav = useNavigate();
 
@@ -18,7 +18,7 @@ export const SubmitPage = () => {
   };
 
   return (
-    <div>
+    <div className="p-3">
       <div className="flex flex-col gap-1">
         <div className="flex justify-between items-center">
           <Title>Корзина</Title>
@@ -34,17 +34,11 @@ export const SubmitPage = () => {
         <Caption>
           В корзине {purchaseLength} {getTranslationByNumber()}
         </Caption>
-        <div className="grid grid-cols-[3fr_1fr_1fr] justify-start items-center">
-          <Typography>Название</Typography>
-          <Typography>Штук</Typography>
-          <Typography>Цена</Typography>
-          {purchases.map(({ pieces, type }) => (
-            <>
-              <Typography>{type.name}</Typography>
-              <Typography>{pieces}</Typography>
-              <Typography>{type.price}</Typography>
-            </>
-          ))}
+        <div className="grid grid-cols-[3fr_1fr] justify-start items-center">
+          <Typography weight="2">Название</Typography>
+          <Typography weight="2">Цена</Typography>
+          <Typography>{purchase?.name}</Typography>
+          <Typography>{purchase?.price}РУБ.</Typography>
         </div>
       </div>
 
