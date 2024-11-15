@@ -24,12 +24,13 @@ export const PaymentPage = () => {
     <div className="p-3 ">
       <div className="flex flex-col gap-3 mb-3">
         <div className="flex justify-between items-center">
-          <Title>Корзина</Title>
+          <Title weight="3">Корзина</Title>
           <Button onClick={() => nav("/submit")}>Вернуться в корзину</Button>
         </div>
         <div className="flex justify-end items-center">
+          <Typography weight="3">Итого:</Typography>
           <Typography>
-            Итого: {paymentMethod === "stars" ? purchase?.stars : purchase?.price}{" "}
+            {paymentMethod === "stars" ? purchase?.stars : purchase?.price}{" "}
             {paymentMethod === "stars" ? "⭐️ (XTR)" : "РУБ."}
           </Typography>
         </div>
