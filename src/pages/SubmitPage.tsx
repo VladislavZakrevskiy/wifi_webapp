@@ -9,16 +9,16 @@ export const SubmitPage = () => {
 
   return (
     <div className="p-3 ">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 mb-3">
         <div className="flex justify-between items-center">
           <Title>Корзина</Title>
           <Button onClick={() => nav("/ratemarket")}>Продолжить покупки</Button>
         </div>
       </div>
 
-      <Divider className="my-3" />
+      <Divider />
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 mt-3">
         <Caption>В корзине {purchase?.name}</Caption>
         <div className="grid grid-cols-[3fr_1fr] justify-start items-center">
           <Typography weight="2">Название</Typography>
