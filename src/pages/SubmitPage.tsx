@@ -8,14 +8,15 @@ export const SubmitPage = () => {
   const nav = useNavigate();
 
   return (
-    <div className="p-3">
-      <div className="flex flex-col gap-1">
+    <div className="p-3 flex">
+      <div className="flex flex-col gap-3">
         <div className="flex justify-between items-center">
           <Title>Корзина</Title>
           <Button onClick={() => nav("/ratemarket")}>Продолжить покупки</Button>
         </div>
-        <Divider />
       </div>
+
+      <Divider className="my-3" />
 
       <div className="flex flex-col gap-2">
         <Caption>В корзине {purchase?.name}</Caption>
@@ -27,7 +28,13 @@ export const SubmitPage = () => {
         </div>
       </div>
 
-      <Button after={<IoChevronForward />} size="l" stretched onClick={() => nav("/payment")}>
+      <Button
+        className="mt-4"
+        after={<IoChevronForward />}
+        size="l"
+        stretched
+        onClick={() => nav("/payment")}
+      >
         К оформлению
       </Button>
     </div>
