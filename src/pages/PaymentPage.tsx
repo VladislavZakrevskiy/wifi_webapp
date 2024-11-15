@@ -10,9 +10,13 @@ export const PaymentPage = () => {
   const nav = useNavigate();
 
   useEffect(() => {
+    const onSendData = () => {
+      alert(JSON.stringify({ paymentMethod, purchase }));
+      tg.sendData(JSON.stringify({ paymentMethod, purchase }));
+    };
+
     tg.MainButton.text = "Оплатить";
-    alert(paymentMethod);
-    tg.MainButton.onClick(() => tg.sendData(JSON.stringify({ paymentMethod, purchase })));
+    tg.MainButton.onClick(onSendData);
     tg.MainButton.show();
   }, [paymentMethod, purchase]);
 
