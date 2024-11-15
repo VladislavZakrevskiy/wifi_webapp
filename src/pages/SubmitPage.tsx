@@ -1,11 +1,18 @@
 import { Button, Caption, Divider, Title, Typography } from "@telegram-apps/telegram-ui";
 import { useCartStore } from "../components/Cart";
 import { useNavigate } from "react-router-dom";
-import { IoChevronForward } from "react-icons/io5";
+import { useEffect } from "react";
+import { tg } from "../config/tg";
 
 export const SubmitPage = () => {
   const { purchase } = useCartStore();
   const nav = useNavigate();
+
+  useEffect(() => {
+    tg.MainButton.onClick(() => nav("/payment"));
+    tg.MainButton.text = "К оплате";
+    tg.MainButton.show();
+  }, []);
 
   return (
     <div className="p-3 ">
@@ -27,16 +34,6 @@ export const SubmitPage = () => {
           <Typography>{purchase?.price}РУБ.</Typography>
         </div>
       </div>
-
-      <Button
-        className="mt-4"
-        after={<IoChevronForward />}
-        size="l"
-        stretched
-        onClick={() => nav("/payment")}
-      >
-        К оформлению
-      </Button>
     </div>
   );
 };
