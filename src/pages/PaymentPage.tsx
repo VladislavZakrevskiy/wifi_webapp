@@ -11,10 +11,7 @@ export const PaymentPage = () => {
 
   useEffect(() => {
     tg.MainButton.text = "Оплатить";
-    tg.MainButton.onClick(() => {
-      tg.sendData(JSON.stringify({ paymentMethod, purchase }));
-      //   tg.close();
-    });
+    tg.MainButton.onClick(() => tg.sendData(JSON.stringify({ paymentMethod, purchase })));
     tg.MainButton.show();
   }, [paymentMethod, purchase]);
 
