@@ -28,7 +28,7 @@ export const PaymentPage = () => {
       <Divider />
 
       <div className="flex flex-col gap-2 mt-3">
-        <div className="grid grid-cols-[3fr_1fr] justify-start items-center">
+        <div className="flex flex-col gap-1 justify-start items-center">
           <Cell
             Component="label"
             before={
