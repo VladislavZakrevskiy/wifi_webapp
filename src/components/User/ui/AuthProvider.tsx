@@ -26,10 +26,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           setIsAuth(true);
           return;
         }
-        console.log(tg.initDataUnsafe);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const params = new URLSearchParams(tg.initDataUnsafe);
+        const params = new URLSearchParams(tg.initData);
         const initDataObj: Record<string, string> = {};
         for (const [key, value] of params.entries()) {
           initDataObj[key] = value;
@@ -44,8 +41,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           .sort()
           .map((key) => `${key}=${initDataObj[key]}`)
           .join("\n");
-
-        console.log(hash, tg.initDataUnsafe);
 
         const res = await axios.post(import.meta.env.VITE_API + "/auth/hash", { dataCheckString });
         const calculatedHash = res.data as { hash: string };
