@@ -27,7 +27,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           return;
         }
         const params = new URLSearchParams(tg.initData);
-        alert(JSON.stringify(params));
         const initDataObj: Record<string, string> = {};
         for (const [key, value] of params.entries()) {
           initDataObj[key] = value;
@@ -61,8 +60,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         nav("/not-auth");
       }
     };
-    authUser();
-  }, []);
+    if (tg.initData) {
+      authUser();
+    }
+  }, [tg.initData]);
 
   if (isLoading) {
     return (
