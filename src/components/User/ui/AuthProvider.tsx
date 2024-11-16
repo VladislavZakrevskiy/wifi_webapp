@@ -5,6 +5,7 @@ import { TgUser } from "../../../types/TGUser";
 import { tg } from "../../../config/tg";
 import axios from "axios";
 import { Spinner } from "@telegram-apps/telegram-ui";
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../../types/localStorage.consts";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -43,10 +44,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           .join("\n");
 
         const res = await axios.post(import.meta.env.VITE_API + "/auth/hash", { dataCheckString });
-        const calculatedHash = res.data as { hash: string };
+        const calculatedHash = res.data as {
+          hash: string;
+          access_token: string;
+          refresh_token: string;
+        };
 
         if (calculatedHash.hash === hash) {
           setIsLoading(false);
+          localStorage.setItem(ACCESS_TOKEN_KEY, calculatedHash.access_token);
+          localStorage.setItem(REFRESH_TOKEN_KEY, calculatedHash.access_token);
           setIsAuth(true);
         } else {
           setIsLoading(false);
