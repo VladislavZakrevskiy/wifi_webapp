@@ -43,6 +43,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           .map((key) => `${key}=${initDataObj[key]}`)
           .join("\n");
 
+        console.log(dataCheckString);
+
         const res = await axios.post(import.meta.env.VITE_API + "/auth/hash", { dataCheckString });
         const calculatedHash = res.data as { hash: string };
 
