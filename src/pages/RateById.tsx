@@ -6,6 +6,7 @@ import { Button, Caption, Spinner, Title, Typography } from "@telegram-apps/tele
 import { tg } from "../config/tg";
 import { useCartStore } from "../components/Cart";
 import { IoArrowBackSharp } from "react-icons/io5";
+import { ACCESS_TOKEN_KEY } from "../types/localStorage.consts";
 
 export const RateById = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +20,9 @@ export const RateById = () => {
     const getRateById = async () => {
       setIsLaoding(true);
       try {
-        const res = await axios.get<Rate>(__API__ + "/rate/" + id);
+        const res = await axios.get<Rate>(import.meta.env.VITE_API + "/rate/" + id, {
+          headers: { Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN_KEY)}` },
+        });
         setCurrentRate(res.data);
       } catch (e) {
         console.log(e);
@@ -29,7 +32,7 @@ export const RateById = () => {
       }
     };
     getRateById();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (purchase?.id === currentRate?.id) {
@@ -39,7 +42,7 @@ export const RateById = () => {
     }
     tg.MainButton.text = purchase ? `Перейти к покупке` : "Добавить";
     tg.MainButton.show();
-  }, [purchase, currentRate]);
+  }, [purchase, currentRate, setPurchase, nav]);
 
   if (isLoading) {
     return (
@@ -52,7 +55,7 @@ export const RateById = () => {
   if (isError) {
     return (
       <div>
-        <Typography color="#f00">Ошибка! Простите, попробуйте обновить страницу</Typography>
+        <Typography>Ошибка! Простите, попробуйте обновить страницу</Typography>
         <Button onClick={() => location.reload()}>Обновить</Button>
       </div>
     );
@@ -61,14 +64,14 @@ export const RateById = () => {
   return (
     <>
       <Button
-        className="absolute top-4 left-6 w-10 h-10 flex justify-center items-center"
+        className="absolute top-2 left-3 w-10 h-10 flex justify-center items-center"
         onClick={() => nav("/ratemarket")}
       >
         <IoArrowBackSharp />
       </Button>
       <div className="p-3 flex flex-col gap-2">
         <img
-          src={__IMAGE_BUCKET__ + currentRate?.image_url}
+          src={import.meta.env.VITE_IMAGE_BUCKET + currentRate?.image_url}
           style={{
             display: "block",
             objectFit: "cover",

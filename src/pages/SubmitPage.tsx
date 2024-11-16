@@ -12,7 +12,7 @@ export const SubmitPage = () => {
     tg.MainButton.onClick(() => nav("/payment"));
     tg.MainButton.text = "К оплате";
     tg.MainButton.show();
-  }, [purchase]);
+  }, [purchase, nav]);
 
   return (
     <div className="p-3 ">

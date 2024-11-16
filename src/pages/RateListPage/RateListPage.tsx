@@ -26,7 +26,7 @@ export const RateListPage = () => {
       tg.MainButton.text = `Перейти к оформлению`;
       tg.MainButton.show();
     }
-  }, [purchase]);
+  }, [purchase, nav]);
 
   if (isLoading) {
     return (
