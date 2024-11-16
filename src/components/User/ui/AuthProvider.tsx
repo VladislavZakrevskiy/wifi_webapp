@@ -27,6 +27,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           return;
         }
         console.log(tg.initDataUnsafe);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         const params = new URLSearchParams(tg.initDataUnsafe);
         const initDataObj: Record<string, string> = {};
         for (const [key, value] of params.entries()) {
