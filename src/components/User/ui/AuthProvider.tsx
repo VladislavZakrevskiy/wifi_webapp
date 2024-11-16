@@ -53,7 +53,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         if (calculatedHash.hash === hash) {
           setIsLoading(false);
           localStorage.setItem(ACCESS_TOKEN_KEY, calculatedHash.access_token);
-          localStorage.setItem(REFRESH_TOKEN_KEY, calculatedHash.access_token);
+          localStorage.setItem(REFRESH_TOKEN_KEY, calculatedHash.refresh_token);
           setIsAuth(true);
         } else {
           setIsLoading(false);
