@@ -27,7 +27,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           return;
         }
         const params = new URLSearchParams(tg.initData);
-
+        alert(JSON.stringify(params));
         const initDataObj: Record<string, string> = {};
         for (const [key, value] of params.entries()) {
           initDataObj[key] = value;
@@ -42,8 +42,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           .sort()
           .map((key) => `${key}=${initDataObj[key]}`)
           .join("\n");
-
-        alert(dataCheckString);
 
         const res = await axios.post(import.meta.env.VITE_API + "/auth/hash", { dataCheckString });
         const calculatedHash = res.data as { hash: string };
