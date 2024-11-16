@@ -60,10 +60,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         nav("/not-auth");
       }
     };
-    if (tg.initData) {
-      authUser();
-    }
-  }, [tg.initData]);
+    authUser();
+  }, []);
 
   if (isLoading) {
     return (

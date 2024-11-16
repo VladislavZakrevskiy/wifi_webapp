@@ -1,6 +1,12 @@
 import { Button, Title, Typography } from "@telegram-apps/telegram-ui";
+import { useEffect } from "react";
+import { tg } from "../config/tg";
 
 export const NotAuth = () => {
+  useEffect(() => {
+    alert(tg.initData);
+  }, []);
+
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="flex flex-col justify-center items-center p-5 gap-3 ">
