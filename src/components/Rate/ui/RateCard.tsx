@@ -17,7 +17,7 @@ export const RateCard: FC<RateCardProps> = ({ rate }) => {
       <Card.Chip readOnly>{price} РУБ.</Card.Chip>
       <img
         onClick={() => nav("/rate/" + rate.id)}
-        src={__IMAGE_BUCKET__ + image_url}
+        src={import.meta.env.VITE_IMAGE_BUCKET + image_url}
         style={{
           display: "block",
           objectFit: "cover",
