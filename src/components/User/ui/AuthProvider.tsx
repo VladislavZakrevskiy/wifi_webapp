@@ -54,7 +54,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           nav("/not-auth");
         }
       } catch (e) {
-        console.log(e);
+        alert(e);
         setIsLoading(false);
         setIsAuth(false);
         nav("/not-auth");
