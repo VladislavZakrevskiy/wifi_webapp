@@ -5,6 +5,7 @@ import { tg } from "../config/tg";
 import { useCartStore } from "../components/Cart";
 import axios from "axios";
 import { useUserStore } from "../components/User";
+import { ACCESS_TOKEN_KEY } from "../types/localStorage.consts";
 
 export const PaymentPage = () => {
   const { purchase } = useCartStore();
@@ -16,11 +17,17 @@ export const PaymentPage = () => {
     tg.MainButton.text = "Оплатить";
     tg.MainButton.onClick(async () => {
       tg.MainButton.isProgressVisible = true;
-      await axios.post(import.meta.env.VITE_API + "/tg/invoice", {
-        paymentMethod,
-        purchase,
-        user_id: tgUser?.id,
-      });
+      await axios.post(
+        import.meta.env.VITE_API + "/tg/invoice",
+        {
+          paymentMethod,
+          purchase,
+          user_id: tgUser?.id,
+        },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN_KEY)}` },
+        }
+      );
       tg.MainButton.isProgressVisible = false;
       tg.close();
     });
