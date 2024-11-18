@@ -16,7 +16,7 @@ export const PaymentPage = () => {
   useEffect(() => {
     tg.MainButton.text = "Оплатить";
     tg.MainButton.onClick(async () => {
-      tg.MainButton.isProgressVisible = true;
+      tg.MainButton.showProgress();
       await axios.post(
         import.meta.env.VITE_API + "/tg/invoice",
         {
@@ -28,7 +28,6 @@ export const PaymentPage = () => {
           headers: { Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN_KEY)}` },
         }
       );
-      tg.MainButton.isProgressVisible = false;
       tg.close();
     });
     tg.MainButton.show();
