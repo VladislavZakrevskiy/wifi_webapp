@@ -3,17 +3,26 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { tg } from "../config/tg";
 import { useCartStore } from "../components/Cart";
+import axios from "axios";
+import { useUserStore } from "../components/User";
 
 export const PaymentPage = () => {
   const { purchase } = useCartStore();
   const [paymentMethod, setPaymentMethod] = useState<"stars" | "tg_native">("tg_native");
   const nav = useNavigate();
+  const { tgUser } = useUserStore();
 
   useEffect(() => {
     tg.MainButton.text = "Оплатить";
-    tg.MainButton.onClick(() => {
-      alert(JSON.stringify({ paymentMethod: paymentMethod, purchase }));
-      tg.sendData(JSON.stringify({ paymentMethod: paymentMethod, purchase }));
+    tg.MainButton.onClick(async () => {
+      tg.MainButton.isProgressVisible = true;
+      await axios.post(import.meta.env.VITE_API + "/tg/invoice", {
+        paymentMethod,
+        purchase,
+        user_id: tgUser?.id,
+      });
+      tg.MainButton.isProgressVisible = false;
+      tg.close();
     });
     tg.MainButton.show();
   }, [paymentMethod, purchase]);
@@ -26,7 +35,7 @@ export const PaymentPage = () => {
           <Button onClick={() => nav("/submit")}>Вернуться в корзину</Button>
         </div>
         <div className="flex justify-end items-center">
-          <Typography weight="3">Итого:</Typography>
+          <Typography weight="3">Итого: </Typography>
           <Typography>
             {paymentMethod === "stars" ? purchase?.stars : purchase?.price}{" "}
             {paymentMethod === "stars" ? "⭐️ (XTR)" : "РУБ."}
